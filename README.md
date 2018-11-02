@@ -1,5 +1,5 @@
 # bunyaner
-Make [bunyan](https://www.npmjs.com/package/bunyan)'s log level methods mo' betta':
+Make [bunyan](https://www.npmjs.com/package/bunyan)'s log level methods much mo' betta' with mo' bunyan-y flavor:
 
 * always returns the first argument given
 * if any key on `arguments[0]` conflicts with bunyan's [core logging fields](https://github.com/trentm/node-bunyan#core-fields), wraps `arguments[0]` with `{ object: arguments[0] }` in the logging level call
