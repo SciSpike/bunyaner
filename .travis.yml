@@ -1,0 +1,11 @@
+language: node_js
+node_js:
+- '8'
+deploy:
+  provider: npm
+  email: npm@scispike.com
+  api_key:
+    secure: ZSA8ktvtqaSfX6pZ6Das6UvOPD+WH8frwEWYNWgDeQtmJe+Q8EE2yMDHV+L3HUkDnLKttQvyMRsVwlVAHr5rkWf7uUtrRTWvqGHUy0cWOMuLHtsh34wQCvh0j5vUB/i3ame9fwttdrs4xRmZHQxHaqCc+rInzQCB5nNRyRHdpT2iYir7bTmcOFqWRATuRf6jLvzaAuc2rXXjpmH5kxXUH7y3iQw070bEEKPCiQMz4x8NwjKu654MRHcAr4UlACGmUAiT36aeUdAkq131KWX0g4SdcmhTC9Li7NiYvKsoLkcfrCehCiYnvScqX51vwBBwhxQUxP/7adxPZwQ2G6cDAYKXcdGBJH2WciXIRTqKCo+84Qq9fAMka+OuLbxrMEW1ri0jgxguhFia6JXpeSKmgK2GNrPhFu9V7DJHuiOqs9+RGW4tYXit3TW+G9IPmWEkW/hoZR2LX+ol/RkuMhqS8btr8udQ4NltNWBkM3KD3vY019lp7eRNvAK1fY8SXgcpErfXF5fX500RP1kJU4ZEWPKFmfThNj3lmvZPGULYffR8lhUiohH36iOn04BmBp58TiPjKmEgewFaIZ3TieQjmVMpMpJizp1KcK3FsBN8uPK7kpfoQFQ2lb/Sty2TCwKudquGho4u8RsxnbMGnzVDiHhw4Qp2Odnr282Mohn1z6Q=
+  on:
+    tags: true
+    all_branches: false
