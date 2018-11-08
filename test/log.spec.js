@@ -23,6 +23,35 @@ describe('unit tests of logger', () => {
     unintercept()
   })
 
+  it('should work with an Error object', () => {
+    const msg = 'a foo message'
+    const expected = new Error(msg)
+
+    const actual = log.error(expected)
+
+    expect(actual).to.deep.equal(expected)
+
+    const json = JSON.parse(stdout)
+
+    expect(json.err).to.deep.equal({ name: 'Error', message: actual.message, stack: actual.stack })
+    expect(json.msg).to.equal(actual.message)
+  })
+
+  it('should work with an Error subclass object', () => {
+    const msg = 'a foo message'
+    class SubError extends Error { }
+    const expected = new SubError(msg)
+
+    const actual = log.error(expected)
+
+    expect(actual).to.deep.equal(expected)
+
+    const json = JSON.parse(stdout)
+
+    expect(json.err).to.deep.equal({ name: 'Error', message: actual.message, stack: actual.stack })
+    expect(json.msg).to.equal(actual.message)
+  })
+
   it('should work with a nonconflicting object', () => {
     const expected = { foo: 'bar', nested: { sna: 'fu' } }
     const msg = 'a foo message'
