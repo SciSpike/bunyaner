@@ -28,8 +28,7 @@ describe('unit tests of logger', () => {
     const expected = new Error(msg)
 
     const actual = log.error(expected)
-
-    expect(actual).to.deep.equal(expected)
+    expect(actual).to.equal(expected)
 
     const json = JSON.parse(stdout)
 
@@ -38,17 +37,33 @@ describe('unit tests of logger', () => {
   })
 
   it('should work with an Error subclass object', () => {
+    const NAME = 'SubError'
+    const CODE = 'E_SUBERROR'
+
+    class SubError extends Error {
+      constructor (msg) {
+        super(msg)
+        this.name = NAME
+        this.code = CODE
+      }
+    }
+
     const msg = 'a foo message'
-    class SubError extends Error { }
     const expected = new SubError(msg)
+    expect(expected.name).to.equal(NAME)
+    expect(expected.code).to.equal(CODE)
 
     const actual = log.error(expected)
-
-    expect(actual).to.deep.equal(expected)
+    expect(actual).to.equal(expected)
 
     const json = JSON.parse(stdout)
 
-    expect(json.err).to.deep.equal({ name: 'Error', message: actual.message, stack: actual.stack })
+    expect(json.err).to.deep.equal({
+      message: actual.message,
+      name: actual.name,
+      stack: actual.stack,
+      code: actual.code
+    })
     expect(json.msg).to.equal(actual.message)
   })
 
@@ -72,8 +87,7 @@ describe('unit tests of logger', () => {
     const msg = 'a v message'
 
     const actual = log.info(expected, msg)
-
-    expect(actual).to.deep.equal(expected)
+    expect(actual).to.equal(expected)
 
     const json = JSON.parse(stdout)
 
@@ -85,8 +99,7 @@ describe('unit tests of logger', () => {
     const expected = 'a plain old string'
 
     const actual = log.info(expected)
-
-    expect(actual).to.deep.equal(expected)
+    expect(actual).to.equal(expected)
 
     const json = JSON.parse(stdout)
 
@@ -98,8 +111,7 @@ describe('unit tests of logger', () => {
     const expected = strings.join(' ')
 
     const actual = log.info(...strings)
-
-    expect(actual).to.deep.equal(strings[0])
+    expect(actual).to.equal(strings[0])
 
     const json = JSON.parse(stdout)
 
