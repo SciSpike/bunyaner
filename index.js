@@ -11,6 +11,11 @@ const patch = log => {
     const original = log[level].bind(log)
 
     log[level] = function (...args) {
+      if (args[0] instanceof Error) {
+        original(...args)
+        return args[0]
+      }
+
       let massagedArgs
 
       if (typeof args[0] === 'object') {
