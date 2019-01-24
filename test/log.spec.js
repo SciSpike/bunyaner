@@ -82,6 +82,28 @@ describe('unit tests of logger', () => {
     expect(json.msg).to.equal(msg)
   })
 
+  it('should work with a nonconflicting object with wrapping forced', () => {
+    const customKey = 'customKey';
+
+    ['', customKey].forEach(key => {
+      const l = require('./force-wrapping-log')(key)
+      key = key || 'object'
+
+      const expected = { foo: 'bar', nested: { sna: 'fu' } }
+      const msg = 'a foo message'
+
+      const actual = l.info(expected, msg)
+
+      expect(actual).to.deep.equal(expected)
+
+      const json = JSON.parse(stdout)
+
+      expect(json[key].foo).to.equal(expected.foo)
+      expect(json[key].nested.sna).to.equal(expected.nested.sna)
+      expect(json.msg).to.equal(msg)
+    })
+  })
+
   it('should work with a conflicting object', () => {
     const expected = { v: 'v' }
     const msg = 'a v message'
