@@ -1,4 +1,19 @@
 # bunyaner
+
+## Deprecation Notice:
+This module has been superceded by [@northscaler/bunyaner](https://www.npmjs.com/package/@northscaler/bunyaner) and will no longer be maintained.
+
+
+### Breaking changes in @northscaler/bunyaner:
+The following breaking changes need to be addressed when upgrading to `@northscaler/bunyaner`:
+
+* The function exported by `require(@northscaler/bunyaner)` uses deconstruction instead of positional parameters.
+* All object payloads, including `Error`s, are placed under the `payload` field; the field name is configurable via option `payloadKey`.
+* When an `Error` is logged, there is a new `isError` field in the log record that contains the boolean Literal `true` (not a string); the field name is configurable via option `errorIndicatorKey`.
+* It is also configurable whether you want to include `isError: false` when non-`Error`s are logged using 
+option `alwaysShowErrorIndicator`. 
+
+## Overview
 Make [bunyan](https://www.npmjs.com/package/bunyan)'s log level methods much mo' betta' with mo' bunyan-y flavor:
 
 * always returns the first argument given
